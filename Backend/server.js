@@ -26,5 +26,5 @@ database.once('connected', () => {
 app.use("/signup", signupRoute);
 
 app.listen(3000, function () {
-  console.log("Working on 3000!!!");
+    console.log("Working on 3000!!!");
 });
