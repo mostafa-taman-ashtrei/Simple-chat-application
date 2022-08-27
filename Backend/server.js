@@ -1,11 +1,11 @@
 require('dotenv').config();
-var express = require("express");
-var mongoose = require("mongoose");
-var bodyParser = require('body-parser');
-var signinRoute = require("./controllers/signin.js");
-var signupRoute = require("./controllers/signup.js");
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require('body-parser');
+const signinRoute = require("./controllers/signin.js");
+const signupRoute = require("./controllers/signup.js");
 
-var app = express();
+const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,6 +25,6 @@ database.once('connected', () => {
 // app.use("/signin", signinRoute);
 app.use("/signup", signupRoute);
 
-app.listen(3000, function () {
-    console.log("Working on 3000!!!");
-});
+const port = process.env.PORT || 8080;
+
+app.listen(port, () => console.log(`Server is runnig on port ${port} ...`));
