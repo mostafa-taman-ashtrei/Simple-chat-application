@@ -21,8 +21,7 @@ const cors = require("cors");
   app.use(cookieParser());
   app.use(
     cors({
-      origin: "*",
-      methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
+      origin: 'http://localhost:3000', credentials: true
     })
   );
 
