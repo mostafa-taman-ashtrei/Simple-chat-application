@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const signinRoute = require("./controllers/signin.js");
 const signupRoute = require("./controllers/signup.js");
+const whoAmI = require("./controllers/whoAmI.js");
 const logoutRoute = require("./controllers/logout");
 const auth = require("./middleware/auth");
 const cors = require("cors");
@@ -36,6 +37,7 @@ const initPassport = require("./config/passport.config.js");
 
   // routes 
   app.use("/auth", auth);
+  app.use("/me", whoAmI)
   app.use("/signin", signinRoute);
   app.use("/signup", signupRoute);
   app.use("/logout", logoutRoute);
