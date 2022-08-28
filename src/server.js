@@ -8,6 +8,9 @@ const signupRoute = require("./controllers/signup.js");
 const logoutRoute = require("./controllers/logout");
 const auth = require("./middleware/auth");
 const cors = require("cors");
+const session = require("./config/session.config.js");
+const initPassport = require("./config/passport.config.js");
+
 
 (async () => {
   if (!process.env.DB_CONNECTION_STRING) throw new Error('Mongo uri was not found!');
@@ -19,17 +22,17 @@ const cors = require("cors");
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(cookieParser());
-  app.use(
-    cors({
-      origin: 'http://localhost:3000', credentials: true
-    })
-  );
+  app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+  app.use(session);
 
   // database 
   await mongoose.connect(process.env.DB_CONNECTION_STRING);
   const database = mongoose.connection;
   database.on("error", (error) => console.log(error));
   database.once("connected", () => console.log("Database Connected ..."));
+
+  // initialize passport
+  initPassport(app);
 
   // routes 
   app.use("/auth", auth);
